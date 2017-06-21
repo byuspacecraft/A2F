@@ -35,3 +35,5 @@ struct sockaddr_spp {
     sa_family_t sspp_family;
     spp_address sspp_addr;
 };
+
+#endif
