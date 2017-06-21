@@ -60,66 +60,26 @@
 
 <p>Currently available applets include:</p>
 
-<pre><code>        [, [[, blkid, cat, chattr, chmod, chown, cp, cttyhack, date, dd,
-        depmod, diff, dmesg, dnsdomainname, echo, egrep, env, expr, fgrep,
-        find, flash_eraseall, flash_lock, flash_unlock, flashcp, fsck, grep,
-        halt, hd, head, hexdump, hostname, hush, ifconfig, init, insmod,
-        kill, less, ln, login, ls, lsattr, lsmod, mdev, mkdir, mke2fs,
-        mkfs.ext2, mknod, modinfo, modprobe, mount, mv, nanddump, nandwrite,
-        netstat, nslookup, ntpd, od, pidof, ping, poweroff, ps, pwd, reboot,
-        rm, rmmod, route, sh, sleep, strings, tail, telnet, telnetd, test,
-        time, touch, traceroute, tune2fs, udhcpc, umount, usleep, vi, wall,
-        watch, watchdog, wc, wget, which, xargs</code></pre>
+<pre><code>        [, [[, cat, chmod, chown, cp, cttyhack, date, dd, depmod, dmesg,
+        dnsdomainname, echo, egrep, env, fgrep, find, grep, halt, hd, head,
+        hexdump, hostname, hush, ifconfig, init, insmod, ip, ipaddr, iplink,
+        iproute, iprule, iptunnel, kill, less, ln, login, ls, lsmod, mdev,
+        mkdir, mknod, modinfo, modprobe, mount, mv, nc, netstat, nslookup,
+        ntpd, od, pidof, ping, poweroff, ps, pwd, reboot, rm, rmmod, route,
+        sh, slattach, sleep, strings, tail, telnet, telnetd, test, time,
+        touch, traceroute, udhcpc, umount, usleep, vi, wall, watch,
+        watchdog, wc, wget, which, xargs</code></pre>
 
 <h1 id="COMMAND-DESCRIPTIONS">COMMAND DESCRIPTIONS</h1>
 
 <dl>
 
-<dt id="blkid"><b>blkid</b></dt>
-<dd>
-
-<p>blkid</p>
-
-<p>Print UUIDs of all filesystems</p>
-
-</dd>
 <dt id="cat"><b>cat</b></dt>
 <dd>
 
 <p>cat [FILE]...</p>
 
 <p>Concatenate FILEs and print them to stdout</p>
-
-</dd>
-<dt id="chattr"><b>chattr</b></dt>
-<dd>
-
-<p>chattr [-R] [-+=AacDdijsStTu] [-v VERSION] [FILE]...</p>
-
-<p>Change file attributes on an ext2 fs</p>
-
-<p>Modifiers:</p>
-
-<pre><code>        -       Remove attributes
-        +       Add attributes
-        =       Set attributes
-Attributes:
-
-        A       Don&#39;t track atime
-        a       Append mode only
-        c       Enable compress
-        D       Write dir contents synchronously
-        d       Don&#39;t backup with dump
-        i       Cannot be modified (immutable)
-        j       Write all data to journal first
-        s       Zero disk storage when deleted
-        S       Write file contents synchronously
-        t       Disable tail-merging of partial blocks with other files
-        u       Allow file to be undeleted
-Options:
-
-        -R      Recurse
-        -v      Set the file&#39;s version/generation number</code></pre>
 
 </dd>
 <dt id="chmod"><b>chmod</b></dt>
@@ -233,32 +193,6 @@ Options:
 <p>Numbers may be suffixed by c (x1), w (x2), b (x512), kD (x1000), k (x1024), MD (x1000000), M (x1048576), GD (x1000000000) or G (x1073741824)</p>
 
 </dd>
-<dt id="diff"><b>diff</b></dt>
-<dd>
-
-<p>diff [-abBdiNqrTstw] [-L LABEL] [-S FILE] [-U LINES] FILE1 FILE2</p>
-
-<p>Compare files line by line and output the differences between them. This implementation supports unified diffs only.</p>
-
-<p>Options:</p>
-
-<pre><code>        -a      Treat all files as text
-        -b      Ignore changes in the amount of whitespace
-        -B      Ignore changes whose lines are all blank
-        -d      Try hard to find a smaller set of changes
-        -i      Ignore case differences
-        -L      Use LABEL instead of the filename in the unified header
-        -N      Treat absent files as empty
-        -q      Output only whether files differ
-        -r      Recurse
-        -S      Start with FILE when comparing directories
-        -T      Make tabs line up by prefixing a tab when necessary
-        -s      Report when two files are the same
-        -t      Expand tabs to spaces in output
-        -U      Output LINES lines of context
-        -w      Ignore all whitespace</code></pre>
-
-</dd>
 <dt id="dmesg"><b>dmesg</b></dt>
 <dd>
 
@@ -298,41 +232,6 @@ Options:
 
 <pre><code>        -, -i   Start with an empty environment
         -u      Remove variable from the environment</code></pre>
-
-</dd>
-<dt id="expr"><b>expr</b></dt>
-<dd>
-
-<p>expr EXPRESSION</p>
-
-<p>Print the value of EXPRESSION to stdout</p>
-
-<p>EXPRESSION may be:</p>
-
-<pre><code>        ARG1 | ARG2     ARG1 if it is neither null nor 0, otherwise ARG2
-        ARG1 &amp; ARG2     ARG1 if neither argument is null or 0, otherwise 0
-        ARG1 &lt; ARG2     1 if ARG1 is less than ARG2, else 0. Similarly:
-        ARG1 &lt;= ARG2
-        ARG1 = ARG2
-        ARG1 != ARG2
-        ARG1 &gt;= ARG2
-        ARG1 &gt; ARG2
-        ARG1 + ARG2     Sum of ARG1 and ARG2. Similarly:
-        ARG1 - ARG2
-        ARG1 * ARG2
-        ARG1 / ARG2
-        ARG1 % ARG2
-        STRING : REGEXP         Anchored pattern match of REGEXP in STRING
-        match STRING REGEXP     Same as STRING : REGEXP
-        substr STRING POS LENGTH Substring of STRING, POS counted from 1
-        index STRING CHARS      Index in STRING where any CHARS is found, or 0
-        length STRING           Length of STRING
-        quote TOKEN             Interpret TOKEN as a string, even if
-                                it is a keyword like &#39;match&#39; or an
-                                operator like &#39;/&#39;
-        (EXPRESSION)            Value of EXPRESSION</code></pre>
-
-<p>Beware that many operators need to be escaped or quoted for shells. Comparisons are arithmetic if both ARGs are numbers, else lexicographical. Pattern matches return the string matched between \( and \) or null; if \( and \) are not used, they return the number of characters matched or 0.</p>
 
 </dd>
 <dt id="find"><b>find</b></dt>
@@ -377,66 +276,6 @@ Options:
         -prune          Stop traversing current subtree
         -delete         Delete files, turns on -depth option
         (EXPR)          Group an expression</code></pre>
-
-</dd>
-<dt id="flash_eraseall"><b>flash_eraseall</b></dt>
-<dd>
-
-<p>flash_eraseall [-jq] MTD_DEVICE</p>
-
-<p>Erase an MTD device</p>
-
-<p>Options:</p>
-
-<pre><code>        -j      Format the device for jffs2
-        -q      Don&#39;t display progress messages</code></pre>
-
-</dd>
-<dt id="flash_lock"><b>flash_lock</b></dt>
-<dd>
-
-<p>flash_lock MTD_DEVICE OFFSET SECTORS</p>
-
-<p>Lock part or all of an MTD device. If SECTORS is -1, then all sectors will be locked, regardless of the value of OFFSET</p>
-
-</dd>
-<dt id="flash_unlock"><b>flash_unlock</b></dt>
-<dd>
-
-<p>flash_unlock MTD_DEVICE</p>
-
-<p>Unlock an MTD device</p>
-
-</dd>
-<dt id="flashcp"><b>flashcp</b></dt>
-<dd>
-
-<p>flashcp -v FILE MTD_DEVICE</p>
-
-<p>Copy an image to MTD device</p>
-
-<p>Options:</p>
-
-<pre><code>        -v      Verbose</code></pre>
-
-</dd>
-<dt id="fsck"><b>fsck</b></dt>
-<dd>
-
-<p>fsck [-ANPRTV] [-C FD] [-t FSTYPE] [FS_OPTS] [BLOCKDEV]...</p>
-
-<p>Check and repair filesystems</p>
-
-<p>Options:</p>
-
-<pre><code>        -A      Walk /etc/fstab and check all filesystems
-        -N      Don&#39;t execute, just show what would be done
-        -P      With -A, check filesystems in parallel
-        -R      With -A, skip the root filesystem
-        -T      Don&#39;t show title on startup
-        -V      Verbose
-        -C n    Write status information to specified filedescriptor
-        -t TYPE List of filesystem types to check</code></pre>
 
 </dd>
 <dt id="grep"><b>grep</b></dt>
@@ -560,9 +399,11 @@ Options:
 
 <pre><code>        [[-]broadcast [ADDRESS]] [[-]pointopoint [ADDRESS]]
         [netmask ADDRESS] [dstaddr ADDRESS]
+        [outfill NN] [keepalive NN]
         [metric NN] [mtu NN]
         [[-]trailers] [[-]arp] [[-]allmulti]
         [multicast] [[-]promisc] [txqueuelen NN] [[-]dynamic]
+        [mem_start NN] [io_addr NN] [irq NN]
         [up|down] ...</code></pre>
 
 </dd>
@@ -580,6 +421,54 @@ Options:
 <p>insmod FILE [symbol=value]...</p>
 
 <p>Load the specified kernel modules into the kernel</p>
+
+</dd>
+<dt id="ip"><b>ip</b></dt>
+<dd>
+
+<p>ip [OPTIONS] {address | route | link | tunnel | rule} {COMMAND}</p>
+
+<p>ip [OPTIONS] OBJECT {COMMAND} where OBJECT := {address | route | link | tunnel | rule} OPTIONS := { -f[amily] { inet | inet6 | link } | -o[neline] }</p>
+
+</dd>
+<dt id="ipaddr"><b>ipaddr</b></dt>
+<dd>
+
+<p>ipaddr { {add|del} IFADDR dev STRING | {show|flush} [dev STRING] [to PREFIX] }</p>
+
+<p>ipaddr {add|delete} IFADDR dev STRING ipaddr {show|flush} [dev STRING] [scope SCOPE-ID] [to PREFIX] [label PATTERN] IFADDR := PREFIX | ADDR peer PREFIX [broadcast ADDR] [anycast ADDR] [label STRING] [scope SCOPE-ID] SCOPE-ID := [host | link | global | NUMBER]</p>
+
+</dd>
+<dt id="iplink"><b>iplink</b></dt>
+<dd>
+
+<p>iplink { set DEVICE { up | down | arp { on | off } | show [DEVICE] }</p>
+
+<p>iplink set DEVICE { up | down | arp | multicast { on | off } | dynamic { on | off } | mtu MTU } iplink show [DEVICE]</p>
+
+</dd>
+<dt id="iproute"><b>iproute</b></dt>
+<dd>
+
+<p>iproute { list | flush | { add | del | change | append | replace | monitor } ROUTE }</p>
+
+<p>iproute { list | flush } SELECTOR iproute get ADDRESS [from ADDRESS iif STRING] [oif STRING] [tos TOS] iproute { add | del | change | append | replace | monitor } ROUTE SELECTOR := [root PREFIX] [match PREFIX] [proto RTPROTO] ROUTE := [TYPE] PREFIX [tos TOS] [proto RTPROTO] [metric METRIC]</p>
+
+</dd>
+<dt id="iprule"><b>iprule</b></dt>
+<dd>
+
+<p>iprule {[list | add | del] RULE}</p>
+
+<p>iprule [list | add | del] SELECTOR ACTION SELECTOR := [from PREFIX] [to PREFIX] [tos TOS] [fwmark FWMARK] [dev STRING] [pref NUMBER] ACTION := [table TABLE_ID] [nat ADDRESS] [prohibit | reject | unreachable] [realms [SRCREALM/]DSTREALM] TABLE_ID := [local | main | default | NUMBER]</p>
+
+</dd>
+<dt id="iptunnel"><b>iptunnel</b></dt>
+<dd>
+
+<p>iptunnel { add | change | del | show } [NAME] [mode { ipip | gre | sit }] [remote ADDR] [local ADDR] [ttl TTL]</p>
+
+<p>iptunnel { add | change | del | show } [NAME] [mode { ipip | gre | sit }] [remote ADDR] [local ADDR] [[i|o]seq] [[i|o]key KEY] [[i|o]csum] [ttl TTL] [tos TOS] [[no]pmtudisc] [dev PHYS_DEV]</p>
 
 </dd>
 <dt id="kill"><b>kill</b></dt>
@@ -677,22 +566,6 @@ Options:
         -h      List sizes in human readable format (1K 243M 2G)</code></pre>
 
 </dd>
-<dt id="lsattr"><b>lsattr</b></dt>
-<dd>
-
-<p>lsattr [-Radlv] [FILE]...</p>
-
-<p>List file attributes on an ext2 fs</p>
-
-<p>Options:</p>
-
-<pre><code>        -R      Recurse
-        -a      Don&#39;t hide entries starting with .
-        -d      List directory entries instead of contents
-        -l      List long flag names
-        -v      List the file&#39;s version/generation number</code></pre>
-
-</dd>
 <dt id="lsmod"><b>lsmod</b></dt>
 <dd>
 
@@ -722,34 +595,6 @@ Options:
 
 <pre><code>        -m      Mode
         -p      No error if exists; make parent directories as needed</code></pre>
-
-</dd>
-<dt id="mke2fs"><b>mke2fs</b></dt>
-<dd>
-
-<p>mke2fs [-Fn] [-b BLK_SIZE] [-i INODE_RATIO] [-I INODE_SIZE] [-m RESERVED_PERCENT] [-L LABEL] BLOCKDEV [KBYTES]</p>
-
-<pre><code>        -b BLK_SIZE     Block size, bytes
-        -F              Force
-        -i RATIO        Max number of files is filesystem_size / RATIO
-        -I BYTES        Inode size (min 128)
-        -L LBL          Volume label
-        -m PERCENT      Percent of blocks to reserve for admin
-        -n              Dry run</code></pre>
-
-</dd>
-<dt id="mkfs.ext2"><b>mkfs.ext2</b></dt>
-<dd>
-
-<p>mkfs.ext2 [-Fn] [-b BLK_SIZE] [-i INODE_RATIO] [-I INODE_SIZE] [-m RESERVED_PERCENT] [-L LABEL] BLOCKDEV [KBYTES]</p>
-
-<pre><code>        -b BLK_SIZE     Block size, bytes
-        -F              Force
-        -i RATIO        Max number of files is filesystem_size / RATIO
-        -I BYTES        Inode size (min 128)
-        -L LBL          Volume label
-        -m PERCENT      Percent of blocks to reserve for admin
-        -n              Dry run</code></pre>
 
 </dd>
 <dt id="mknod"><b>mknod</b></dt>
@@ -809,25 +654,11 @@ TYPEs include:
 <p>Options:</p>
 
 <pre><code>        -a              Mount all filesystems in fstab
-        -i              Don&#39;t run mount helper
         -r              Read-only mount
         -w              Read-write mount (default)
         -t FSTYPE       Filesystem type
         -O OPT          Mount only filesystems with option OPT (-a only)
 -o OPT:
-        [a]sync         Writes are [a]synchronous
-        [no]atime       Disable/enable updates to inode access times
-        [no]diratime    Disable/enable atime updates to directories
-        [no]relatime    Disable/enable atime updates relative to modification time
-        [no]dev         (Dis)allow use of special device files
-        [no]exec        (Dis)allow use of executable files
-        [no]suid        (Dis)allow set-user-id-root programs
-        [r]shared       Convert [recursively] to a shared subtree
-        [r]slave        Convert [recursively] to a slave subtree
-        [r]private      Convert [recursively] to a private subtree
-        [un]bindable    Make mount point [un]able to be bind mounted
-        bind            Bind a file or directory to another location
-        move            Relocate an existing mount point
         remount         Remount a mounted filesystem, changing flags
         ro/rw           Same as -r/-w</code></pre>
 
@@ -847,28 +678,24 @@ TYPEs include:
         -i      Interactive, prompt before overwrite</code></pre>
 
 </dd>
-<dt id="nanddump"><b>nanddump</b></dt>
+<dt id="nc"><b>nc</b></dt>
 <dd>
 
-<p>nanddump [-o] [-s ADDR] [-l LEN] [-f FILE] MTD_DEVICE</p>
+<p>nc [OPTIONS] HOST PORT - connect nc [OPTIONS] -l -p PORT [HOST] [PORT] - listen</p>
 
-<p>Dump MTD_DEVICE</p>
+<p>Options:</p>
 
-<pre><code>        -o      Dump oob data
-        -s ADDR Start address
-        -l LEN  Length
-        -f FILE Dump to file (&#39;-&#39; for stdout)</code></pre>
-
-</dd>
-<dt id="nandwrite"><b>nandwrite</b></dt>
-<dd>
-
-<p>nandwrite [-p] [-s ADDR] MTD_DEVICE [FILE]</p>
-
-<p>Write to MTD_DEVICE</p>
-
-<pre><code>        -p      Pad to page size
-        -s ADDR Start address</code></pre>
+<pre><code>        -e PROG Run PROG after connect (must be last)
+        -l      Listen mode, for inbound connects
+        -p PORT Local port
+        -s ADDR Local address
+        -w SEC  Timeout for connects and final net reads
+        -i SEC  Delay interval for lines sent
+        -n      Don&#39;t do DNS resolution
+        -u      UDP mode
+        -v      Verbose
+        -o FILE Hex dump traffic
+        -z      Zero-I/O mode (scanning)</code></pre>
 
 </dd>
 <dt id="netstat"><b>netstat</b></dt>
@@ -1052,6 +879,25 @@ TYPEs include:
         -A inet Select address family</code></pre>
 
 </dd>
+<dt id="slattach"><b>slattach</b></dt>
+<dd>
+
+<p>slattach [-cehmLF] [-s SPEED] [-p PROTOCOL] DEVICE</p>
+
+<p>Attach network interface(s) to serial line(s)</p>
+
+<p>Options:</p>
+
+<pre><code>        -p PROT Set protocol (slip, cslip, slip6, clisp6 or adaptive)
+        -s SPD  Set line speed
+        -e      Exit after initializing device
+        -h      Exit when the carrier is lost
+        -c PROG Run PROG when the line is hung up
+        -m      Do NOT initialize the line in raw 8 bits mode
+        -L      Enable 3-wire operation
+        -F      Disable RTS/CTS flow control</code></pre>
+
+</dd>
 <dt id="sleep"><b>sleep</b></dt>
 <dd>
 
@@ -1183,14 +1029,6 @@ TYPEs include:
         -t      Type-of-service in probe packets (default 0)
         -w      Time in seconds to wait for a response (default 3)
         -g      Loose source route gateway (8 max)</code></pre>
-
-</dd>
-<dt id="tune2fs"><b>tune2fs</b></dt>
-<dd>
-
-<p>tune2fs [-L LABEL] BLOCKDEV</p>
-
-<p>Adjust filesystem options on ext[23] filesystems</p>
 
 </dd>
 <dt id="udhcpc"><b>udhcpc</b></dt>

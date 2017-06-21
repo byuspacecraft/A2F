@@ -109,7 +109,8 @@ enum __socket_type
 #define	PF_IEEE802154	36	/* IEEE 802.15.4 sockets.  */
 #define	PF_CAIF		37	/* CAIF sockets.  */
 #define	PF_ALG		38	/* Algorithm sockets.  */
-#define	PF_MAX		39	/* For now..  */
+#define PF_SPP          39
+#define	PF_MAX		40	/* For now..  */
 
 /* Address families.  */
 #define	AF_UNSPEC	PF_UNSPEC
@@ -151,6 +152,7 @@ enum __socket_type
 #define	AF_IEEE802154	PF_IEEE802154
 #define	AF_CAIF		PF_CAIF
 #define	AF_ALG		PF_ALG
+#define AF_SPP          PF_SPP
 #define	AF_MAX		PF_MAX
 
 /* Socket level values.  Others are defined in the appropriate headers.
