@@ -161,6 +161,9 @@ int flash_eraseall_main(int argc UNUSED_PARAM, char **argv)
 
 	for (erase.start = 0; erase.start < meminfo.size;
 	     erase.start += meminfo.erasesize) {
+
+      sleep(1);
+
 		if (flags & BBTEST) {
 			int ret;
 			loff_t offset = erase.start;
@@ -204,15 +207,15 @@ int flash_eraseall_main(int argc UNUSED_PARAM, char **argv)
 			xioctl(fd, MEMWRITEOOB, &oob);
 		} else {
 			xlseek(fd, erase.start, SEEK_SET);
-			/* if (lseek(fd, erase.start, SEEK_SET) < 0) {
+			 if (lseek(fd, erase.start, SEEK_SET) < 0) {
 				bb_perror_msg("MTD %s failure", "seek");
 				continue;
-			} */
+			} 
 			xwrite(fd, &cleanmarker, sizeof(cleanmarker));
-			/* if (write(fd, &cleanmarker, sizeof(cleanmarker)) != sizeof(cleanmarker)) {
+			 if (write(fd, &cleanmarker, sizeof(cleanmarker)) != sizeof(cleanmarker)) {
 				bb_perror_msg("MTD %s failure", "write");
 				continue;
-			} */
+			} 
 		}
 		if (!(flags & OPTION_Q))
 			printf(" Cleanmarker written at %x.", erase.start);
